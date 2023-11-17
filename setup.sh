@@ -7,7 +7,7 @@ requirements_url="https://raw.githubusercontent.com/maladrill/translations_pbx/m
 script_url="https://raw.githubusercontent.com/maladrill/translations_pbx/main/process_translations.py"
 
 # Check if Python3 is installed
-if ! command -v python3 &>/dev/null; then
+if ! command -v python3.6 &>/dev/null; then
     echo "Error: Python3 is not installed."
     exit 1
 fi
@@ -15,7 +15,7 @@ fi
 # Check if venv directory exists
 if [ ! -d "$venv_dir" ]; then
     # Create virtual environment
-    python3 -m venv "$venv_dir"
+    python3.6 -m venv "$venv_dir"
 fi
 
 # Activate virtual environment
