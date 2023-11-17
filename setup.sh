@@ -1,23 +1,30 @@
 #!/bin/bash
 
-# Create virtual environment
-python3 -m venv /home/translations
+venv_dir="/home/translations"
 
-# Activate virtual environment
-source /home/translations/bin/activate
+# Check if the venv directory exists
+if [ ! -d "$venv_dir" ]; then
+    # Create virtual environment
+    python3 -m venv "$venv_dir"
 
-# Install required packages
-pip install certifi==2023.7.22
-pip install charset-normalizer==2.0.12
-pip install idna==3.4
-pip install requests==2.27.1
-pip install urllib3==1.26.18
+    # Activate virtual environment
+    source "$venv_dir/bin/activate"
+
+    # Download the requirements.txt file from GitHub
+    curl -o "$venv_dir/requirements.txt" https://raw.githubusercontent.com/maladrill/translations_pbx/main/requirements.txt
+
+    # Install required packages from requirements.txt
+    pip install -r "$venv_dir/requirements.txt"
+else
+    # Activate existing virtual environment
+    source "$venv_dir/bin/activate"
+fi
 
 # Download the Python script
-curl -o /home/process_translations.py https://raw.githubusercontent.com/maladrill/translations_pbx/main/process_translations.py
+curl -o "$venv_dir/process_translations.py" https://raw.githubusercontent.com/maladrill/translations_pbx/main/process_translations.py
 
 # Run the script
-python /home/process_translations.py
+python "$venv_dir/process_translations.py"
 
 # Deactivate the virtual environment
 deactivate
