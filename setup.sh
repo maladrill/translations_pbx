@@ -44,3 +44,5 @@ fi
 
 # Deactivate the virtual environment
 deactivate
+# Display Info
+echo "Jeśli chcesz usunąć tłumaczenie wydaj komendę: /home/translations/bin/python /home/translations/uninstall.py"
