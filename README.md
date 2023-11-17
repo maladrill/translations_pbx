@@ -4,4 +4,4 @@
 <p>Instalator zainstaluje na serwerze skrypt pythona z tego repozytorium oraz wymagane zależności, a następnie pobierze pliki tłumaczenia na język polski z weblate i skompiluje na twojej centrali.</p>
 <p>Skrypt został zaktualizowany, aby w sytuacji, gdy środowisko wirtualne było skonfigurowane wcześniej, nie tworzyć go niepotrzebnie.
 <p><b>UWAGA!</b> Tłumaczenie nie jest przetestowane przez zespół FreePBX, niniejsze skrypty również. Używać wyłącznie na systemach testowych i do celów testowych.</p>
-<p>Jeśli chcesz usunąć tłumaczenie wydaj komendę <code>/home/translations/bin/python /home/translations/uninstall.py</code></p>
+<p>Jeśli chcesz usunąć tłumaczenie wydaj komendę: <code>/home/translations/bin/python /home/translations/uninstall.py</code></p>
