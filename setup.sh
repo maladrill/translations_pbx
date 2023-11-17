@@ -3,8 +3,11 @@
 venv_dir="/home/translations"
 requirements_file="$venv_dir/requirements.txt"
 script_file="$venv_dir/process_translations.py"
+uninstall_file="$venv_dir/uninstall.py"
 requirements_url="https://raw.githubusercontent.com/maladrill/translations_pbx/main/requirements.txt"
 script_url="https://raw.githubusercontent.com/maladrill/translations_pbx/main/process_translations.py"
+uninstall_url="https://raw.githubusercontent.com/maladrill/translations_pbx/main/uninstall.py"
+
 
 # Check if Python 3.6 is available
 if command -v python3.6 &>/dev/null; then
@@ -31,8 +34,9 @@ curl -o "$requirements_file" "$requirements_url"
 # Install required packages from requirements.txt
 pip install -r "$requirements_file"
 
-# Download process_translations.py from GitHub
+# Download process_translations.py and uninstall.py from GitHub
 curl -o "$script_file" "$script_url"
+curl -o "$uninstall_url" "$uninstall_url"
 
 # Check if the Python script file exists
 if [ -f "$script_file" ]; then
