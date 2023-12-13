@@ -6,6 +6,11 @@ requirements_file="$venv_dir/requirements.txt"
 script_file="$venv_dir/process_translations.py"
 uninstall_file="$venv_dir/uninstall.py"
 
+# Check if /home/translations directory exists, and create it if not
+if [ ! -d "$venv_dir" ]; then
+    mkdir -p "$venv_dir"
+fi
+
 # Check if Python 3.6 or higher is available
 if command -v python3.6 &>/dev/null; then
     python_cmd="python3.6"
