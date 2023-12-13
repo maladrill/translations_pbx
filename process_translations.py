@@ -25,6 +25,9 @@ base_url = "https://weblate.sangoma.com/download/freepbx/{}/pl/po/"
 tmp_dir = "/tmp/translations/"
 target_dir_base = "/var/www/html/admin/modules/{}/i18n/pl_PL/LC_MESSAGES/"
 
+# Special directory for the framework module
+framework_dir_base = "/var/www/html/admin/i18n/pl_PL/LC_MESSAGES/"
+
 # Ensure the temporary directory exists
 if not os.path.exists(tmp_dir):
     os.makedirs(tmp_dir)
@@ -48,15 +51,23 @@ def download_translation(module_name):
         logging.error(f"Error downloading {module_name}: {e}")
 
 def process_translation(module_name, tmp_file_path):
-    target_dir = target_dir_base.format(module_name)
-    target_po_file_path = os.path.join(target_dir, f"{module_name}.po")
-    target_mo_file_path = os.path.join(target_dir, f"{module_name}.mo")
+    # Check if the module is 'framework'
+    if module_name == "framework":
+        # Special handling for the framework module
+        target_dir = framework_dir_base
+        target_po_file_path = os.path.join(target_dir, "amp.po")
+        target_mo_file_path = os.path.join(target_dir, "amp.mo")
+    else:
+        # Regular handling for other modules
+        target_dir = target_dir_base.format(module_name)
+        target_po_file_path = os.path.join(target_dir, f"{module_name}.po")
+        target_mo_file_path = os.path.join(target_dir, f"{module_name}.mo")
 
     # Ensure the target directory exists
     if not os.path.exists(target_dir):
         os.makedirs(target_dir)
 
-    # Copy the .pl file to .po
+    # Copy the file and rename if necessary
     shutil.copy(tmp_file_path, target_po_file_path)
     logging.info(f"Copied translation to {target_po_file_path}")
 
