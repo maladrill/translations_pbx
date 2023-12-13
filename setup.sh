@@ -21,22 +21,19 @@ else
     exit 1
 fi
 
-# Check if venv directory exists
-if [ ! -d "$venv_dir" ]; then
-    # Create virtual environment using the detected Python version
-    $python_cmd -m venv "$venv_dir"
+# Create and activate the virtual environment if it doesn't exist
+if [ ! -d "$venv_dir/env" ]; then
+    $python_cmd -m venv "$venv_dir/env"
+    source "$venv_dir/env/bin/activate"
+    pip install -r "$requirements_file"
+else
+    source "$venv_dir/env/bin/activate"
 fi
-
-# Activate virtual environment
-source "$venv_dir/bin/activate"
 
 # Download requirements.txt, process_translations.py, and uninstall.py from GitHub
 curl -o "$requirements_file" "$repo_url/requirements.txt"
 curl -o "$script_file" "$repo_url/process_translations.py"
 curl -o "$uninstall_file" "$repo_url/uninstall.py"
-
-# Install required packages from requirements.txt
-pip install -r "$requirements_file"
 
 # Check if the Python script file exists
 if [ -f "$script_file" ]; then
@@ -50,4 +47,4 @@ fi
 # Deactivate the virtual environment
 deactivate
 # Display Info
-echo "Jeśli chcesz usunąć tłumaczenie wydaj komendę: /home/translations/bin/python /home/translations/uninstall.py"
+echo "Jeśli chcesz usunąć tłumaczenie wydaj komendę: /home/translations/env/bin/python /home/translations/uninstall.py"
